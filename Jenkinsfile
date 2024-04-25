@@ -12,7 +12,6 @@ pipeline {
             }
         }
 
-    stages {
         stage('Build') {
             steps {
                 script {
@@ -24,6 +23,7 @@ pipeline {
                 }
             }
         }
+
         stage('Publish') {
             when {
                 branch 'master'
@@ -32,6 +32,6 @@ pipeline {
                 sh 'docker run -d -p 82:80 --name website-container website-build'
             }
         }
+    }
 }
-}
-}
+
