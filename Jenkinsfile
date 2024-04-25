@@ -1,6 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+        GIT_REPO_URL = 'https://github.com/AntXS/website.git'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: GIT_REPO_URL]]])
+            }
+        }
+
     stages {
         stage('Build') {
             steps {
