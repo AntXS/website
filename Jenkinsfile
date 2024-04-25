@@ -7,14 +7,24 @@ pipeline {
     }
     stages {
         stage('Checkout') {
+    steps {
+        checkout([$class: 'GitSCM', branches: [[name: 'master'], [name: 'develop']], userRemoteConfigs: [[url: 'https://github.com/AntXS/website.git']]])
+    }
+}
+
+         
+        stage('Pull Code from GitLab') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master', name: '*/develop']], userRemoteConfigs: [[url: 'https://github.com/AntXS/website.git']]])
+                          git branch: 'master', url: 'https://github.com/AntXS/website.git'
+
             }
-        }
+        
+         }
+             
         stage('Build') {
             steps {
                 script {
-                    docker.build(DOCKER_IMAGE, "--no-cache")
+                   sh "docker build -t $DOCKER_IMAGE . --no-cache"
                 }
             }
         }
@@ -32,7 +42,7 @@ pipeline {
             }
             steps {
                 script {
-                    docker.run("-d -p ${DOCKER_PORT_MAPPING} --name ${CONTAINER_NAME} ${DOCKER_IMAGE}")
+                    sh "docker  run -d -p ${DOCKER_PORT_MAPPING} --name ${CONTAINER_NAME} ${DOCKER_IMAGE}"
                 }
             }
         }
