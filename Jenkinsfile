@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'apache_image:v1'
-        CONTAINER_NAME = 'website-container'
+        DOCKER_IMAGE = 'apache_image:v1-master'
+        CONTAINER_NAME = 'website-container-master'
         DOCKER_PORT_MAPPING = '82:80'
     }
     stages {
