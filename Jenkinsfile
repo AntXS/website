@@ -16,9 +16,9 @@ pipeline {
             steps {
                 script {
                     if (env.BRANCH_NAME == 'master') {
-                        sh 'docker build -t website-build .'
+                        sh 'docker build -t apache_image:v1 .'
                     } else if (env.BRANCH_NAME == 'develop') {
-                        sh 'docker build -t website-build --build-arg SKIP_PUBLISH=true .'
+                        sh 'docker build -t apache_image:v1 --build-arg SKIP_PUBLISH=true .'
                     }
                 }
             }
@@ -29,7 +29,7 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh 'docker run -d -p 82:80 --name website-container website-build'
+                sh 'docker run -d -p 82:80 --name website-container apache_image:v1'
             }
         }
     }
