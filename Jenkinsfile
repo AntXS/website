@@ -46,13 +46,6 @@ pipeline {
                 }
             }
         }
-        stage('No Start for develop') {
-            when {
-                branch 'develop'
-            }
-            steps {
-                echo "Skipping container start on the develop branch"
-            }
-        }
+        
     }
 }
