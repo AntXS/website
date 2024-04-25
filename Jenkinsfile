@@ -1,8 +1,8 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE = 'apache_image:v1'
-        CONTAINER_NAME = 'website-container'
+        DOCKER_IMAGE = 'apache_image:v1-develop'
+        CONTAINER_NAME = 'website-container-develop'
         DOCKER_PORT_MAPPING = '82:80'
     }
     stages {
@@ -28,14 +28,7 @@ pipeline {
                 }
             }
         }
-        stage('Stop and Remove Container') {
-            steps {
-                script {
-                    sh "docker stop ${CONTAINER_NAME} || true"
-                    sh "docker rm ${CONTAINER_NAME} || true"
-                }
-            }
-        }
+        
         stage('Start Container for master') {
             when {
                 branch 'master'
