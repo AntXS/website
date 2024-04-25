@@ -29,16 +29,7 @@ pipeline {
             }
         }
         
-        stage('Start Container for master') {
-            when {
-                branch 'master'
-            }
-            steps {
-                script {
-                    sh "docker  run -d -p ${DOCKER_PORT_MAPPING} --name ${CONTAINER_NAME} ${DOCKER_IMAGE}"
-                }
-            }
-        }
+        
         stage('No Start for develop') {
             when {
                 branch 'develop'
