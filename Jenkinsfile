@@ -32,3 +32,6 @@ pipeline {
                 sh 'docker run -d -p 82:80 --name website-container website-build'
             }
         }
+}
+}
+}
