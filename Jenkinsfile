@@ -5,17 +5,11 @@ pipeline {
         CONTAINER_NAME = 'website-container-develop'
         DOCKER_PORT_MAPPING = '82:80'
     }
-    stages {
-        stage('Checkout') {
-    steps {
-        checkout([$class: 'GitSCM', branches: [[name: 'master'], [name: 'develop']], userRemoteConfigs: [[url: 'https://github.com/AntXS/website.git']]])
-    }
-}
-
-         
+    stages {    
+        
         stage('Pull Code from GitLab') {
             steps {
-                          git branch: 'master', url: 'https://github.com/AntXS/website.git'
+                          git branch: 'develop', url: 'https://github.com/AntXS/website.git'
 
             }
         
